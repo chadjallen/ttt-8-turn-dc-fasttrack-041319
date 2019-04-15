@@ -1,29 +1,43 @@
-require_relative '..lib/turn.rb'
+def display_board(board)
+  puts " #{board[0]} | #{board[1]} | #{board[2]} "
+  puts "-----------"
+  puts " #{board[3]} | #{board[4]} | #{board[5]} "
+  puts "-----------"
+  puts " #{board[6]} | #{board[7]} | #{board[8]} "
+end
 
-board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+def input_to_index(user_input)
+  user_input.to_i - 1
+end
 
-puts "Welcome to Tic Tac Toe!"
+def valid_move?(board, index)
+  if index.between?(0,8)
+    if !position_taken?(board, index)
+      true
+    end
+  end
 
-display_board(board)
-turn(board)
+  # position.to_i.between?(0,8) && !position_taken?(board, position.to_i-1)
+end
 
 def turn(board)
   puts "Please enter 1-9:"
-end
-
-def display_board
-  puts board
-end
-
-def valid_move
-  if position_taken == TRUE
-    puts board[]
+  input = gets.strip
+  index = input_to_index(input)
+  if valid_move?(board, index)
+    move(board, index)
+    display_board(board)
+  else
+    turn(board)
   end
 end
 
-def move
-  ruby input_to_index
-  board[move]
+def position_taken?(board, index)
+  board[index] != " "
+end
+
+def move(board, index, current_player = "X")
+  board[index] = current_player
 end
 
 
